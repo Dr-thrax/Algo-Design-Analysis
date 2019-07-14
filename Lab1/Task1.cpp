@@ -14,7 +14,11 @@ long long radix2(string s)
 int main()
 {
 
-    vector <long long> v;
+    vector <long long> v(100000);
+    for(int i=0;i<100000;i++)
+    {
+        v[i] = 0;
+    }
 
     string line;
     getline(cin,line);
@@ -28,21 +32,14 @@ int main()
     }
     for(int i=0;i<tok.size();i++)
     {
-        v.push_back(radix2(tok[i]));
+        v[radix2(tok[i])%99773]++;
     }
 
-    sort(v.begin(),v.end());
-    long long count = 0;
-
-    for(int i=0;i<v.size()-1;i++)
+    for(int i=0;i<v.size();i++)
     {
-        if(i==0)
+        if(v[i]!=0)
         {
-            count++;
-            continue;
+            cout<< i << "\t" << v[i] << endl;
         }
-        if(v[i]!=v[i+1]) count++;
     }
-
-    cout << count << endl;
 }
